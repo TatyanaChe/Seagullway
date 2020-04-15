@@ -9,41 +9,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MainPage extends PageObject {
+public class UserCreatePage extends PageObject {
 
 	@FindBy(id = "user_first_name")
-	private WebElement name;
-	
-	@FindBy(id = "user_email")
-	private WebElement email;
+	private static WebElement name;
 
-	@FindBy(id = "user_password_signup")
+	@FindBy(id = "user_password")
 	private WebElement password;
-	
-//	@FindBy(xpath = "//*[@value='Sign up']")
-	@FindBy(className = "button")
-	private WebElement buttonSignUp;
 
-
-	public MainPage(WebDriver driver) {
+	public UserCreatePage(WebDriver driver) {
 		super(driver);
 	}
 
-	public void open() {
-		driver.get("https://www.goodreads.com/");
-	}
-
-
 	public void enterPassword(String pwd) {
 		password.sendKeys(pwd);
-
 	}
-
-	public void clickButtonSighUp() {
-		buttonSignUp.click();		
-	}
-
-
-	
 
 }
