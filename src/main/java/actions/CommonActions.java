@@ -12,7 +12,7 @@ public class CommonActions {
 		name.sendKeys("Tanya");
 		WebElement email = driver.findElement(By.id("user_email"));
 		email.clear();
-		email.sendKeys("test1029384756@mailinator.com");
+		email.sendKeys("test16042020@mailinator.com");
 	}
 
 }
