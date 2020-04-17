@@ -137,6 +137,7 @@ public class GoodreadsTest {
 			System.out.println("bookHref: " + bookHref);
 			driver.get(bookHref);
 			bookPage.markBooksWantToRead();
+			driver.navigate().refresh();
 			WebElement el = driver.findElement(By.xpath("//button[@title='Remove this book from your shelves']"));
 			assertTrue("Book did not mark as want to read", el.isDisplayed());
 			System.out.println("Book marked as want to read");
@@ -144,7 +145,18 @@ public class GoodreadsTest {
 			Thread.sleep(3000);
 
 				}
+//		6. Mark as read
+		for (String bookHref : bookHrefList) {
+			System.out.println("bookHref: " + bookHref);
+			driver.get(bookHref);
+			bookPage.markAsRead();
+			WebElement el = driver.findElement(By.xpath("//button[@title='Remove this book from your shelves']"));
+			assertTrue("Book did not mark as want to read", el.isDisplayed());
+			System.out.println("Book marked as want to read");
+			
+			Thread.sleep(3000);
 
+				}
 		Thread.sleep(30000);
 		driver.close();
 	}
