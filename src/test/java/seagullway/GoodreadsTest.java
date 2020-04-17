@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.After;
@@ -12,12 +13,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import actions.CommonActions;
 import common.Browser;
 import common.DriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.AuthorizedPage;
+import pages.BookPage;
 import pages.MainPage;
 import pages.ResultSearchPage;
 import pages.UserCreatePage;
@@ -124,13 +127,24 @@ public class GoodreadsTest {
 //	}
 //	@Test
 //	public void testMarkToRead() throws InterruptedException {
-//		Mark top 3 books as "Want to read"
+//		List top 3 books
 		ResultSearchPage resultSearchPage = new ResultSearchPage(driver);
-//		resultSearchPage.getFirstNumberResults(3);
-		resultSearchPage.markFirstNumberResultsAsWantToRead(1);
-		
-		
+		List<String> bookHrefList = resultSearchPage.listFirstNumberResultsAsWantToRead(3);
 		System.out.println("First books found");
+		// Mark books
+		BookPage bookPage = new BookPage(driver);
+		for (String bookHref : bookHrefList) {
+			System.out.println("bookHref: " + bookHref);
+			driver.get(bookHref);
+			bookPage.markBooksWantToRead();
+			WebElement el = driver.findElement(By.xpath("//button[@title='Remove this book from your shelves']"));
+			assertTrue("Book did not mark as want to read", el.isDisplayed());
+			System.out.println("Book marked as want to read");
+			
+			Thread.sleep(3000);
+
+				}
+
 		Thread.sleep(30000);
 		driver.close();
 	}

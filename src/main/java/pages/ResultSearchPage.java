@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ResultSearchPage<type> extends PageObject {
+public class ResultSearchPage extends PageObject {
 
 	@FindBy(xpath = "//table[@class='tableList']")
 	private WebElement tableList;
@@ -33,31 +33,27 @@ public class ResultSearchPage<type> extends PageObject {
 		super(driver);
 	}
 
-	public void markFirstNumberResultsAsWantToRead(Integer qty) {
+	public ArrayList<String> listFirstNumberResultsAsWantToRead(Integer qty) {
 		List<WebElement> itemscopes = new ArrayList<WebElement>();
 		itemscopes = driver.findElements(By.xpath("//table[@class='tableList']/tbody/tr"));
+		ArrayList<String> bookHrefTextList = new ArrayList<String>();
 		ArrayList<String> bookHrefList = new ArrayList<String>();
 		Iterator<WebElement> it = itemscopes.iterator();
 		int count = 0;
 		while (it.hasNext()) {
-			System.out.println("count: ds " + count);
-			if (count >= qty ) {
-				System.out.println("count: breaking " + count);
+			if (count >= qty) {
 				break;
 			}
 			count++;
 
 			WebElement el = it.next();
-			String bookHref = el.findElement(By.xpath(".//td[2]/a")).getText();
+			String bookHrefText = el.findElement(By.xpath(".//td[2]/a")).getText();
+			bookHrefTextList.add(bookHrefText);
+			String bookHref = el.findElement(By.xpath(".//td[2]/a")).getAttribute("href");
 			bookHrefList.add(bookHref);
+			System.out.println("bookHrefTextList: " + bookHrefTextList);
 			System.out.println("bookHrefList: " + bookHrefList);
 		}
-// Mark books
-		for (String bookHref : bookHrefList) {
-			System.out.println("bookHref: " + bookHref);
-			driver.get(bookHref);
-
-		}
-
+		return bookHrefList;
 	}
 }
