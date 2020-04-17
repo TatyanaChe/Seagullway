@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import actions.CommonActions;
@@ -107,7 +108,10 @@ public class GoodreadsTest {
 		mainPage.enterGrButton();
 		Thread.sleep(3000);
 		AuthorizedPage authorizedPage = new AuthorizedPage(driver);
-		authorizedPage.enterCloseButton();
+		if(driver.findElement(By.xpath("//*[@class='gr-button gr-button--large']")).isDisplayed()) {
+			authorizedPage.enterCloseButton();
+		}
+//		authorizedPage.enterCloseButton();
 		Thread.sleep(3000);
 		assertTrue("Authorization did not pass", driver.getTitle().toString().equals("Recent updates | Goodreads"));
 		System.out.println("Authorization passed");
@@ -116,7 +120,18 @@ public class GoodreadsTest {
 		assertTrue("Results not found", driver.getCurrentUrl().toString().equals("https://www.goodreads.com/search?q=Best+crime+and+mystery+books&qid="));
 		System.out.println("Results found");
 		Thread.sleep(3000);
+//		driver.close();
+//	}
+//	@Test
+//	public void testMarkToRead() throws InterruptedException {
+//		Mark top 3 books as "Want to read"
+		ResultSearchPage resultSearchPage = new ResultSearchPage(driver);
+//		resultSearchPage.getFirstNumberResults(3);
+		resultSearchPage.markFirstNumberResultsAsWantToRead(1);
+		
+		
+		System.out.println("First books found");
+		Thread.sleep(30000);
 		driver.close();
 	}
-
 }

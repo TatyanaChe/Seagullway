@@ -12,6 +12,7 @@ public class AuthorizedPage extends PageObject {
 
 	@FindBy(xpath = "//form[@class='searchBox__form']")
 	private WebElement searchBoxes;
+	
 
 	public AuthorizedPage(WebDriver driver) {
 		super(driver);
