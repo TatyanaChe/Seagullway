@@ -119,20 +119,6 @@ public class BookPage extends PageObject {
 		
 	}
 	
-//	public void deleteFromShelf() throws InterruptedException {
-//		// Delete from shelf
-//		linkMyBooks.click();
-//		Thread.sleep(1000);
-//		ShelfPage shelfPage = new ShelfPage(driver);
-//		//Remove books from shelf
-//		shelfPage.removeBooks();
-//		System.out.println("shelfPage.removeBooks");
-//		Thread.sleep(1000);
-//		driver.navigate().back();
-//		System.out.println("back from shelf page");
-//
-//	}
-
 	public void logout() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(driver, 5000);
 		By locatorDropdownMenu = By.xpath("//div[@class='dropdown dropdown--profileMenu']/a");
