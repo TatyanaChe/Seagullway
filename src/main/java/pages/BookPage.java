@@ -30,6 +30,10 @@ public class BookPage extends PageObject {
 	@FindBy(xpath = "//button[@class='wtrExclusiveShelf']")
 	private WebElement buttonWtrExclusiveShelf;
 
+//	@FindBy(xpath = "//a[text()='Write a review']")
+	@FindBy(xpath = "//table[@class='myActivity']/tbody/tr[6]/td[2]/a")
+	private WebElement buttonWriteReview;
+
 	public BookPage(WebDriver driver) {
 		super(driver);
 	}
@@ -62,11 +66,24 @@ public class BookPage extends PageObject {
 		Thread.sleep(3000);
 		System.out.println("buttonWtrShelf");
 		action.perform();
+		Thread.sleep(3000);
 		buttonWtrExclusiveShelf.click();
 		
 		
 		Thread.sleep(3000);
 		
+		
+	}
+
+	public void writeReview() throws InterruptedException {
+		buttonWriteReview.click();
+		Thread.sleep(3000);
+		WriteReviewPage writeReviewPage = new WriteReviewPage(driver);
+		writeReviewPage.rateBook();
+		System.out.println("writeReviewPage.rateBook()");
+		Thread.sleep(3000);
+		writeReviewPage.writeFeedback();
+		System.out.println("writeReviewPage.writeFeedback");
 		
 	}
 
