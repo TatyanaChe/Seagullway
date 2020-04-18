@@ -14,21 +14,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ResultSearchPage extends PageObject {
 
-	@FindBy(xpath = "//table[@class='tableList']")
-	private WebElement tableList;
-
-	@FindBy(xpath = "//table[@class='tableList']/tr/td/div")
-	private WebElement tableItemList;
-
-	@FindBy(xpath = "*//a[@class='bookTitle']")
-	public List<WebElement> bookList;
-
-	@FindBy(xpath = "//tr[@itemtype='http://schema.org/Book']")
-	public List<WebElement> searchList;
-
-	@FindBy(xpath = "//button[@class='wtrToRead']")
-	private WebElement buttonWantToRead;
-
 	public ResultSearchPage(WebDriver driver) {
 		super(driver);
 	}
